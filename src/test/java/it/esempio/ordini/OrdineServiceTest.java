@@ -1,0 +1,22 @@
+package it.esempio.ordini;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.math.BigDecimal;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class OrdineServiceTest {
+
+    private final OrdineService service = new OrdineService();
+
+    private static Ordine ordineConDueRighe() {
+        return new Ordine("ORD-1", "Rossi", List.of(
+                new RigaOrdine("A1", 2, new BigDecimal("10.00")),
+                new RigaOrdine("B2", 1, new BigDecimal("5.50"))));
+    }
+
+    @Test
+    void totale_ordineConDueRighe_sommaGliImporti() {
+        assertEquals(new BigDecimal("25.50"), service.totale(ordineConDueRighe()));
+    }
+}
