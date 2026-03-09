@@ -19,4 +19,9 @@ class OrdineServiceTest {
     void totale_ordineConDueRighe_sommaGliImporti() {
         assertEquals(new BigDecimal("25.50"), service.totale(ordineConDueRighe()));
     }
+
+    @Test
+    void pezzi_ordineConDueRighe_sommaLeQuantita() {
+        assertEquals(3, service.pezzi(ordineConDueRighe()));
+    }
 }

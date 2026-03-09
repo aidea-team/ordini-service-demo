@@ -13,4 +13,11 @@ public class OrdineService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .setScale(2, RoundingMode.HALF_UP);
     }
+
+    /** Il numero di pezzi dell'ordine: la somma delle quantità delle righe. */
+    public int pezzi(Ordine ordine) {
+        return ordine.righe().stream()
+                .mapToInt(RigaOrdine::quantita)
+                .sum();
+    }
 }
