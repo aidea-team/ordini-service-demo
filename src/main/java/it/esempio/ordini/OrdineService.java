@@ -20,4 +20,13 @@ public class OrdineService {
                 .mapToInt(RigaOrdine::quantita)
                 .sum();
     }
+
+    /** Il totale dopo uno sconto in percentuale, da 0 a 100, a due decimali. */
+    public BigDecimal totaleScontato(Ordine ordine, int percentuale) {
+        if (percentuale < 0 || percentuale > 100) {
+            throw new IllegalArgumentException("percentuale fuori da 0-100: " + percentuale);
+        }
+        BigDecimal fattore = BigDecimal.valueOf(100 - percentuale).divide(BigDecimal.valueOf(100));
+        return totale(ordine).multiply(fattore).setScale(2, RoundingMode.HALF_UP);
+    }
 }
