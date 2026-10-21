@@ -16,7 +16,7 @@ public class EsportazioneCsv {
         int pezzi = ordine.righe().stream().mapToInt(RigaOrdine::quantita).sum();
         return String.join(";",
                 ordine.numero(),
-                ordine.cliente(),
+                ordine.cliente().replace(';', ','),
                 String.valueOf(pezzi),
                 String.format(Locale.ROOT, "%.2f", TotaliLegacy.totale(importi)));
     }
